@@ -76,6 +76,8 @@ function add(product) {
   );
 }
 
+const sidebar = document.getElementById("filtermenu");
+
 const buttonfilter = document.querySelectorAll(".filterbtn");
 buttonfilter.forEach(button => {
     button.addEventListener("click", () => {
@@ -83,76 +85,12 @@ buttonfilter.forEach(button => {
         container.innerHTML = "";
         const filteredProducts = products.filter(product => product.product_type === category || category === "ALL");
         filteredProducts.forEach(product => add(product));
-        if (category !== "ALL") {
-          const area=document.querySelector(".productarea");
-          area.insertAdjacentHTML("beforebegin", 
-            `
-            <div id="filtermenu" class="filtermenu w-1/8 p-6 m-5 h-screen">
-    <div class="dropdown dropdown-end">
-    <label tabindex="0" class="btn text-zinc-600 bg-rose-200 border-rose-200 m-1">Select Brand</label>
-    <ul tabindex="0" class="dropdown-content menu">
-   <li><a id="ALL BRANDS">ALL BRANDS</a></li>
-    <li><a id="almay">almay</a></li>
-    <li><a id="alva">alva</a></li>
-    <li><a id="anna sui">anna sui</a></li>
-    <li><a id="annabelle">annabelle</a></li>
-    <li><a id="benefit">benefit</a></li>
-    <li><a id="boosh">boosh</a></li>
-    <li><a id="burt's bees">burt's bees</a></li>
-    <li><a id="butter london">butter london</a></li>
-    <li><a id="c'est moi">c'est moi</a></li>
-    <li><a id="cargo cosmetics">cargo cosmetics</a></li>
-    <li><a id="china glaze">china glaze</a></li>
-    <li><a id="clinique">clinique</a></li>
-    <li><a id="coastal classic creation">coastal classic creation</a></li>
-    <li><a id="colourpop">colourpop</a></li>
-    <li><a id="covergirl">covergirl</a></li>
-    <li><a id="dalish">dalish</a></li>
-    <li><a id="deciem">deciem</a></li>
-    <li><a id="dior">dior</a></li>
-    <li><a id="dr. hauschka">dr. hauschka</a></li>
-    <li><a id="e.l.f.">e.l.f.</a></li>
-    <li><a id="essie">essie</a></li>
-    <li><a id="fenty">fenty</a></li>
-    <li><a id="glossier">glossier</a></li>
-    <li><a id="green people">green people</a></li>
-    <li><a id="iman">iman</a></li>
-    <li><a id="l'oreal">l'oreal</a></li>
-    <li><a id="lotus cosmetics usa">lotus cosmetics usa</a></li>
-    <li><a id="maia's mineral galaxy">maia's mineral galaxy</a></li>
-    <li><a id="marcelle">marcelle</a></li>
-    <li><a id="marienatie">marienatie</a></li>
-    <li><a id="maybelline">maybelline</a></li>
-    <li><a id="milani">milani</a></li>
-    <li><a id="mineral fusion">mineral fusion</a></li>
-    <li><a id="misa">misa</a></li>
-    <li><a id="mistura">mistura</a></li>
-    <li><a id="moov">moov</a></li>
-    <li><a id="nudus">nudus</a></li>
-    <li><a id="nyx">nyx</a></li>
-    <li><a id="orly">orly</a></li>
-    <li><a id="pacifica">pacifica</a></li>
-    <li><a id="penny lane organics">penny lane organics</a></li>
-    <li><a id="physicians formula">physicians formula</a></li>
-    <li><a id="piggy paint">piggy paint</a></li>
-    <li><a id="pure anada">pure anada</a></li>
-    <li><a id="rejuva minerals">rejuva minerals</a></li>
-    <li><a id="revlon">revlon</a></li>
-    <li><a id="sally b's skin yummies">sally b's skin yummies</a></li>
-    <li><a id="salon perfect">salon perfect</a></li>
-    <li><a id="sante">sante</a></li>
-    <li><a id="sinful colours">sinful colours</a></li>
-    <li><a id="smashbox">smashbox</a></li>
-    <li><a id="stila">stila</a></li>
-    <li><a id="suncoat">suncoat</a></li>
-    <li><a id="w3llpeople">w3llpeople</a></li>
-    <li><a id="wet n wild">wet n wild</a></li>
-    <li><a id="zorah">zorah</a></li>
-    <li><a id="zorah biocosmetiques">zorah biocosmetiques</a></li>
-      </ul>
-    </div>`
-          );
-          area.scrollIntoView({ behavior: "smooth" });
+        if(category !== "ALL"){
+          sidebar.classList.remove ("hidden");
+          
+        } 
+        if (category === "ALL") {
+          sidebar.classList.add("hidden");
         }
     });
 });
