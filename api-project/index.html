@@ -7,38 +7,62 @@
     <title>api-project</title>
   </head>
 
-  <body class="bg-[#ffffff] text-[#000000] min-h-screen">
-    
+  <body class="bg-rose-50 text-zinc-600 min-h-screen">
+    <!-- 
     <div> TEST: If data works print here</div>
     <div id="api-response"></div>
-
-
-    <div class="navbar bg-[#cfcfcf] shadow-sm">
-  <div class="navbar-start">
-    <div class="dropdown">
-      <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /> </svg>
+     -->
+   <!--  NAVBAR (stole it from DAISYUI)-->
+    <div class="navbar bg-rose-200 shadow-sm">
+  <div class="flex-1">
+    <a class="btn btn-ghost text-xl tracking-widest hover:bg-rose-100 hover:border-rose-100 hover:text-zinc-600" > 
+      <img src="/images/flower.png" alt="Logo" class="h-7 w-7">PLACEHOLDER</a>
+  </div>
+  <div class="flex gap-4 items-center">
+    <input
+      type="text"
+      placeholder="Search"
+      class="input bg-rose-50 input-bordered rounded-full w-60 "
+      />
+    <div class="dropdown dropdown-end">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-circle  hover:bg-rose-100  hover:border-rose-100 hover:text-zinc-600">
+        <div class="indicator">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+               viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4m-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+        </div>
+      </div>
+      <div tabindex="0"
+        class="card card-compact dropdown-content bg-zinc-100 z-1 mt-3 w-52 shadow">
+        <div class="card-body">
+          <span class="text-zinc-500 font-bold">8 Items</span>
+          <span class="text-rose-400">Subtotal: $999</span>
+          <div class="card-actions">
+            <button class="btn btn-block bg-rose-100 text-white hover:bg-rose-200 border-rose-200">View cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="dropdown dropdown-end">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar hover:bg-rose-100 hover:border-rose-100 hover:text-zinc-600">
+        <div class="w-10 rounded-full">
+          <img
+            alt="Tailwind CSS Navbar component"
+            src="/images/profpic.png" />
+        </div>
       </div>
       <ul
         tabindex="-1"
-        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-        <li><a>Homepage</a></li>
-        <li><a>Portfolio</a></li>
-        <li><a>About</a></li>
+        class="menu menu-sm dropdown-content text-rose-400 bg-rose-200 rounded-box z-1 mt-3 w-52 p-2 shadow">
+        <li><a>Profile</a></li>
       </ul>
     </div>
   </div>
-  <div class="navbar-center">
-    <a class="btn btn-ghost text-xl">PLACEHOLDER</a>
-  </div>
-  <div class="navbar-end">
-    <button class="btn btn-ghost btn-circle">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /> </svg>
-    </button>
-    </button>
-  </div>
+   <!--  MENU (stole it from DAISYUI)-->
 </div>
 
+    </div>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
