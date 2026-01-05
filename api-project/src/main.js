@@ -77,20 +77,37 @@ function add(product) {
 }
 
 const sidebar = document.getElementById("filtermenu");
+const brandchoices = document.querySelectorAll(".brandchoice");
 
 const buttonfilter = document.querySelectorAll(".filterbtn");
+
 buttonfilter.forEach(button => {
-    button.addEventListener("click", () => {
-        const category = button.id;
-        container.innerHTML = "";
-        const filteredProducts = products.filter(product => product.product_type === category || category === "ALL");
-        filteredProducts.forEach(product => add(product));
-        if(category !== "ALL"){
-          sidebar.classList.remove ("hidden");
-          
-        } 
-        if (category === "ALL") {
-          sidebar.classList.add("hidden");
+  button.addEventListener("click", () => {
+    const category = button.id;
+    container.innerHTML = "";
+    const filteredByType = products.filter(
+      product => product.product_type === category || category === "ALL");
+    filteredByType.forEach(product => add(product));
+    if (category !== "ALL") {
+      sidebar.classList.remove("hidden");
+    } else {
+      sidebar.classList.add("hidden");
+    }
+    brandchoices.forEach(choice => {
+      choice.onclick = () => {
+        const brand = choice.id;
+        if (brand === "ALLBRANDS") {
+          container.innerHTML = "";
+          filteredByType.forEach(product => add(product));
+          return;
         }
+        else {
+        let finalProducts;
+          finalProducts = filteredByType.filter(p => p.brand?.toLowerCase() === brand.toLowerCase());
+        container.innerHTML = "";
+        finalProducts.forEach(product => add(product));
+        }
+      }
     });
-});
+  });
+}   );
