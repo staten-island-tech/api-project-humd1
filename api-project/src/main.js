@@ -70,7 +70,7 @@ function add(product) {
       <p class="text-gray-700 mb-2">${product.brand}</p>
       <p class="text-pink-600 font-semibold">$${product.price}0</p>
       <button class="cartbutton" data-id="${product.id}">Add to Cart</button>
-      <button class="view" data-id="${product.id}">View More</button>
+      <button data-id="${product.id}" class="view hover:text-rose-400">View More</button>
     </div>
     `
   );
@@ -82,6 +82,7 @@ const brandchoices = document.querySelectorAll(".brandchoice");
 const buttonfilter = document.querySelectorAll(".filterbtn");
 
 const search = document.getElementById("search");
+const window = document.querySelector(".window");
 
 search.addEventListener("input", () => {
   const text = search.value.toLowerCase();
@@ -99,6 +100,8 @@ buttonfilter.forEach(button => {
   button.addEventListener("click", () => {
     const category = button.id;
     container.innerHTML = "";
+    document.getElementById("productdetails").classList.add("hidden");
+    window.classList.remove("hidden");
     const filteredByType = products.filter(
       product => product.product_type === category || category === "ALL");
     filteredByType.forEach(product => add(product));
@@ -124,4 +127,30 @@ buttonfilter.forEach(button => {
       }
     });
   });
-}   );
+});
+
+document.addEventListener("click", async (e) => {
+  if (!e.target.matches(".view")) return;
+  const id = e.target.dataset.id;
+  await viewmore(id);
+});
+
+async function viewmore(id) {
+  try {
+    const response = await fetch(`https://makeup-api.herokuapp.com/api/v1/products/${id}.json`);
+    if (response.status != 200) {
+      throw new Error(response);
+    } else {
+      const data = await response.json(); 
+    document.getElementById("name").textContent = data.name;
+    document.getElementById("image").src = data.api_featured_image;
+    document.getElementById("description").textContent = data.description || "No description";
+    document.getElementById("price").textContent = `$${data.price}`;
+    window.classList.add("hidden");
+    document.getElementById("productdetails").classList.remove("hidden");
+    }
+  } catch (error) {
+    console.log(error);
+    console.log("no bueno");
+  }
+}

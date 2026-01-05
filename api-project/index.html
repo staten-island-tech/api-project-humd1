@@ -7,7 +7,7 @@
     <title>api-project</title>
   </head>
 
-  <body class="bg-rose-50 text-zinc-600 min-h-screen">
+  <body class="bg-linear-to-b from-rose-50 to-rose-600 text-zinc-600 min-h-screen">
     <!-- 
     <div> TEST: If data works print here</div>
     <div id="api-response"></div>
@@ -78,7 +78,7 @@
   </div>
 
   
-   <div class="flex">
+   <div class="window flex">
   <!-- SIDE MENU -->
    <div id="filtermenu" class="filtermenu hidden w-64 justify-center items-center p-10 m-5 h-screen">
    <div class="dropdown dropdown-end">
@@ -145,12 +145,25 @@
   </ul>
 </div>
    </div>
+
   <!-- CONTAINER -->
     <div id="product-container" class="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
       
     </div>
-    <div class="bg-rose-50 flex h-screen items-end">
+  </div>
+    
+  <!-- SHOW PRODUCTS-->
+    <div id="productdetails" class="hidden flex-col justify-center items-center p-10 m-5">
+    <h2 id="name"></h2>
+    <img id="image" />
+    <p id="description"></p>
+    <p id="price"></p>
+  </div>
+
     <script type="module" src="/src/main.js"></script>
+    
+  
+  <div class="bg-rose-50 flex h-screen items-end"></div>
   </body>
   </div>
 </html>
