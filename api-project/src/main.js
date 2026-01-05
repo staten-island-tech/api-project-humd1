@@ -81,6 +81,20 @@ const brandchoices = document.querySelectorAll(".brandchoice");
 
 const buttonfilter = document.querySelectorAll(".filterbtn");
 
+const search = document.getElementById("search");
+
+search.addEventListener("input", () => {
+  const text = search.value.toLowerCase();
+  const filtered = products.filter(product =>
+    product.name?.toLowerCase().includes(text) ||
+    product.brand?.toLowerCase().includes(text) ||
+    product.product_type?.toLowerCase().includes(text)
+  );
+  container.innerHTML = "";
+  filtered.forEach(product => add(product));
+  sidebar.classList.add("hidden");
+});
+
 buttonfilter.forEach(button => {
   button.addEventListener("click", () => {
     const category = button.id;
