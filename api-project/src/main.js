@@ -23,7 +23,7 @@ getData(URL).then(data => console.log(data));
  */
 
 const URL = "https://makeup-api.herokuapp.com/api/v1/products.json";
-const container = document.getElementById("product-container");
+const container = document.getElementById("productcontainer");
 let products = [];
 
 async function getData(URL, limit) {
@@ -52,7 +52,7 @@ async function getData(URL, limit) {
     return data;
   } catch (error) {
     console.log(error);
-    container.innerHTML = "<p class='text-red-500'>Failed to load products.</p>";
+    container.innerHTML = "<p class='text-red-500'>Loading Failed</p>";
   }
 }
 getData(URL, 40).then(data => {
@@ -78,9 +78,7 @@ function add(product) {
 
 const sidebar = document.getElementById("filtermenu");
 const brandchoices = document.querySelectorAll(".brandchoice");
-
 const buttonfilter = document.querySelectorAll(".filterbtn");
-
 const search = document.getElementById("search");
 const window = document.querySelector(".window");
 
@@ -147,10 +145,121 @@ async function viewmore(id) {
     document.getElementById("description").textContent = data.description || "No description";
     document.getElementById("price").textContent = `$${data.price}`;
     window.classList.add("hidden");
+    document.getElementById("yourcart").classList.add("hidden");
     document.getElementById("productdetails").classList.remove("hidden");
     }
   } catch (error) {
     console.log(error);
     console.log("no bueno");
+    container.innerHTML = "<p class='text-red-500'>Loading Failed</p>";
   }
 }
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+const yourcart = document.getElementById("yourcart");
+updatepopup();
+
+
+function savecart() {
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+
+document.addEventListener("click", async (e) => {
+  if (!e.target.matches(".cartbutton")) return;
+  const id = e.target.dataset.id;
+  addtocart(id);
+});
+
+async function addtocart(id) {
+  const response = await fetch(
+    `https://makeup-api.herokuapp.com/api/v1/products/${id}.json`
+  );
+  const product = await response.json();
+
+  const existing = cart.find(item => item.id === product.id);
+
+  if (existing) {
+    existing.quantity += 1;
+  } else {
+    cart.push({
+      id: product.id,
+      name: product.name,
+      price: product.price ,
+      image: product.api_featured_image,
+      quantity: 1
+    });
+  }
+  
+  savecart();
+  console.log(cart);
+  updatepopup();
+}
+
+function updatepopup() {
+  const quantity = document.getElementById("quantity");
+  const subtotalbox = document.getElementById("subtotal");
+
+  let itemCount = 0;
+  let subtotal = 0;
+
+  cart.forEach(item => {
+    itemCount += item.quantity;
+    subtotal += item.price * item.quantity;
+  });
+
+  quantity.textContent = `${itemCount} Items`;
+  subtotalbox.textContent = `Subtotal: $${subtotal.toFixed(2)}`;
+}
+
+document.getElementById("viewcart").addEventListener("click", () => {
+  viewcart();
+  yourcart.classList.remove("hidden");
+});
+
+function viewcart() {
+  document.getElementById("productdetails").classList.add("hidden");
+  const cartItems = document.getElementById("cart-items");
+  cartItems.innerHTML = "";
+  window.classList.add("hidden");
+  window.classList.add("hidden");
+
+  cart.forEach(item => {
+    cartItems.insertAdjacentHTML(
+      "beforeend",
+      `
+      <div class="flex gap-6 items-start">
+        <img src="${item.image}" class="w-32 h-32 object-cover rounded">
+        <div>
+          <h2 class="text-xl font-bold">${item.name}</h2>
+          <p class="text-pink-600">$${item.price}</p>
+          <p class="text-sm text-zinc-500">Qty: ${item.quantity}</p>
+          <button class="remove" data-id="${item.id}">Remove</button>
+        </div>
+      </div>
+      `
+    );
+  });
+}
+
+document.addEventListener("click", (e) => {
+  if (!e.target.matches(".remove")) return;
+
+  const id = Number(e.target.dataset.id);
+  removeitem(id);
+});
+
+function removeitem(id) {
+  const item = cart.find(item => item.id === id);
+
+  if (item.quantity > 1) {
+    item.quantity -= 1;
+  } else {
+    cart = cart.filter(item => item.id !== id);
+  }
+
+  savecart();
+  updatepopup();
+  viewcart();
+}
+

@@ -37,10 +37,10 @@
       <div tabindex="0"
         class="card card-compact dropdown-content bg-zinc-100 z-1 mt-3 w-52 shadow">
         <div class="card-body">
-          <span class="text-zinc-500 font-bold">8 Items</span>
-          <span class="text-rose-400">Subtotal: $999</span>
+          <span id="quantity" class="text-zinc-500 font-bold">0 Items</span>
+          <span id = "subtotal" class="text-rose-400">Subtotal: $0.00</span>
           <div class="card-actions">
-            <button class="btn btn-block bg-rose-100 text-white hover:bg-rose-200 border-rose-200">View cart</button>
+            <button id = "viewcart" class="btn btn-block bg-rose-100 text-white hover:bg-rose-200 border-rose-200">View cart</button>
           </div>
         </div>
       </div>
@@ -147,23 +147,30 @@
    </div>
 
   <!-- CONTAINER -->
-    <div id="product-container" class="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
+    <div id="productcontainer" class="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
       
     </div>
   </div>
     
   <!-- SHOW PRODUCTS-->
-    <div id="productdetails" class="hidden flex-col justify-center items-center p-10 m-5">
-    <h2 id="name"></h2>
-    <img id="image" />
-    <p id="description"></p>
-    <p id="price"></p>
+  <div id="productdetails" class="hidden flex gap-6 items-start p-10 m-5 bg-white rounded shadow">
+  <img id="image" class="w-64 h-64 object-cover rounded"/>
+  <div class="flex flex-col gap-2">
+    <h2 id="name" class="text-2xl font-bold"></h2>
+    <p id="description" class="text-gray-600"></p>
+    <p id="price" class="text-pink-600 font-semibold text-lg"></p>
   </div>
+</div>
 
-    <script type="module" src="/src/main.js"></script>
-    
-  
+ <!-- CART -->
+    <div id="yourcart" class="hidden p-10 m-5 bg-white rounded shadow">
+  <h2 class="text-2xl font-bold mb-4">Your Cart</h2>
+  <div id="cart-items" class="flex flex-col gap-6"></div>
+</div>
+
+
   <div class="bg-rose-50 flex h-screen items-end"></div>
+  <script type="module" src="/src/main.js"></script>
   </body>
   </div>
 </html>
