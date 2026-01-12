@@ -22,7 +22,7 @@ getData(URL).then(data => console.log(data));
 
  */
 
-const URL = "https://makeup-api.herokuapp.com/api/v1/products.json";
+const URL = "/.netlify/functions/getProducts";
 const container = document.getElementById("productcontainer");
 let products = [];
 
@@ -135,7 +135,7 @@ document.addEventListener("click", async (e) => {
 
 async function viewmore(id) {
   try {
-    const response = await fetch(`https://makeup-api.herokuapp.com/api/v1/products/${id}.json`);
+    const response = await fetch(`/.netlify/functions/getProducts?id=${id}`);
     if (response.status != 200) {
       throw new Error(response);
     } else {
@@ -172,9 +172,7 @@ document.addEventListener("click", async (e) => {
 });
 
 async function addtocart(id) {
-  const response = await fetch(
-    `https://makeup-api.herokuapp.com/api/v1/products/${id}.json`
-  );
+  const response = await fetch(`/.netlify/functions/getProducts?id=${id}`);
   const product = await response.json();
 
   const existing = cart.find(item => item.id === product.id);
